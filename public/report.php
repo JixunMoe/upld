@@ -44,12 +44,14 @@ if (mysqli_stmt_num_rows($reported) === 1)
 	mysqli_stmt_fetch($reported);
 	mysqli_stmt_close($reported);
 
-	if ($result === 0)
+	$actioned = (int)$actioned;
+
+	if ($actioned === 0)
 	{
-		exit_message('This image has already been reported and is under review');
+		exit_message('This image has already been reported and is under review.');
 	}
 
-	elseif ($result === 1)
+	elseif ($actioned === 1)
 	{
 		exit_message('This image has already been reported, and after review was deemed to be acceptable.');
 	}
@@ -71,7 +73,9 @@ mysqli_stmt_close($query);
 // close connection
 mysqli_close($db);
 
-mail(REPORT_EMAIL, 'An image has been reported (' . $id . ')', 'The following image has been reported: ' . VIEW_URL . $id, 'FROM: reports <reports@' . SITE_URL . '>');
+if (SEND_REPORT_EMAIL) {
+	mail(REPORT_EMAIL, 'An image has been reported (' . $id . ')', 'The following image has been reported: ' . VIEW_URL . $id, 'FROM: reports <reports@' . SITE_URL . '>');
+}
 
 exit_message('This image has been reported and will be reviewed. Thank you.');
 
