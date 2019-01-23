@@ -36,4 +36,3 @@ $allowed_urls = [
 	'i.imgur.com',
 	'i.upld.eu'
 ];
-
