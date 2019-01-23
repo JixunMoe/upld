@@ -17,9 +17,9 @@ define('MAIN_SCRIPT_PATH', (SCRIPT_PATH ? trim(SCRIPT_PATH, '/') . '/' : ''));
 
 define('VIEW_PATH', (FRIENDLY_URLS ? '' : 'view.php?id='));
 
-define('VIEW_URL', 'http://' . MAIN_SITE_URL . MAIN_SCRIPT_PATH . VIEW_PATH);
+define('VIEW_URL', MAIN_SITE_URL . MAIN_SCRIPT_PATH . VIEW_PATH);
 
-define('IMAGES_URL', 'http://' . (FRIENDLY_URLS ? 'i.' : '') . MAIN_SITE_URL . (FRIENDLY_URLS ? '' : MAIN_SCRIPT_PATH . 'images/'));
+define('IMAGES_URL', (FRIENDLY_URLS ? IMAGE_URL : (MAIN_SITE_URL . MAIN_SCRIPT_PATH . 'images')) . '/' );
 
 define('IN_SCRIPT', true);
 
