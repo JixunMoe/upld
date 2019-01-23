@@ -1,0 +1,7 @@
+/public/config.php
+
+/public/thumb/*
+!/public/thumb/index.html
+
+/public/images/*
+!/public/images/index.html
