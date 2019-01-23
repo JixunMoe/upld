@@ -81,5 +81,5 @@ if ($result === 1)
 
 mysqli_close($db);
 
-exit_message('The image ' . $_GET['id'] . ' has been removed');
+header('location: ' . SITE_URL . '/account.php');
 
