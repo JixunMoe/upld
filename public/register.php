@@ -3,6 +3,10 @@
 require('config.php');
 require('common.php');
 
+if (!ALLOW_REGISTER) {
+	exit_message('This site is not open for new user registration.');
+}
+
 if (!isset($_POST['submit']))
 {
 	require('inc/header.php');
@@ -13,7 +17,7 @@ if (!isset($_POST['submit']))
 
 validate_csrf();
 
-if (empty($_POST['email']) || empty($_POST['email-confirm']) || empty($_POST['password']) || empty($_POST['password-confirm']))
+if (empty($_POST['email']) || empty($_POST['password']))
 {
 	exit_message('Please make sure all fields are filled in');
 }
@@ -23,19 +27,9 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
 	exit_message('The email you entered is invalid');
 }
 
-if ($_POST['email'] !== $_POST['email-confirm'])
-{
-	exit_message('The email and confirmation email do not match');
-}
-
 if (strlen($_POST['password']) < 8)
 {
 	exit_message('Please enter a longer password (8 characters minimum)');
-}
-
-if ($_POST['password'] !== $_POST['password-confirm'])
-{
-	exit_message('The password and confirmation password do not match');
 }
 
 // user has filled in all fields, entered a valid email and long enough password
