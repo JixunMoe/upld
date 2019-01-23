@@ -11,6 +11,8 @@ if (!isset($_POST['submit']))
 	exit;
 }
 
+validate_csrf();
+
 if (empty($_POST['email']) || empty($_POST['email-confirm']) || empty($_POST['password']) || empty($_POST['password-confirm']))
 {
 	exit_message('Please make sure all fields are filled in');

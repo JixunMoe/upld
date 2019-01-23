@@ -3,6 +3,8 @@
 require('config.php');
 require('common.php');
 
+validate_csrf();
+
 // see if anonymous uploads has been disabled, and check if the user is logged in
 if (ANON_UPLOADS === false && !isset($_SESSION['user']))
 {

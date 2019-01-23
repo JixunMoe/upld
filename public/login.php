@@ -11,6 +11,8 @@ if (!isset($_POST['submit']))
 	exit;
 }
 
+validate_csrf();
+
 if (empty($_POST['email']) || empty($_POST['password']))
 {
 	exit_message('Please make sure you enter both an email address and password');

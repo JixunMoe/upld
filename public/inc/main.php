@@ -88,6 +88,7 @@ if ((ANON_UPLOADS === true) || ((ANON_UPLOADS === false) && (isset($_SESSION['us
 
 		<form id="upload-form" class="hidden" name="upload" method="POST" action="upload.php" enctype="multipart/form-data">
 			<input id="image-input" name="image" type="file" />
+			<?php input_csrf(); ?>
 		</form>
 
 		<div id="cancel-image" class="hidden">
@@ -103,6 +104,7 @@ if ((ANON_UPLOADS === true) || ((ANON_UPLOADS === false) && (isset($_SESSION['us
 
 		<form id="url-form" name="remote-url" method="POST" action="upload.php">
 
+			<?php input_csrf(); ?>
 			<div id="download-url" class="box">
 				<input id="image-url-submit" type="submit" value="download remote image" />
 			</div>

@@ -3,6 +3,8 @@
 require('config.php');
 require('common.php');
 
+validate_csrf();
+
 // make sure user is logged in (for non-admins, we will verify their ID later)
 if (!isset($_SESSION['user']))
 {

@@ -30,10 +30,7 @@ if (!defined('IN_SCRIPT'))
 if (isset($_SESSION['user']))
 {
 
-?>
-
-			--><li><a href="account.php">my account</a></li><!--
-			--><li><a href="logout.php">logout</a></li>
+?><li><a href="account.php">my account</a></li><li><a href="logout.php?csrf=<?= get_csrf() ?>">logout</a></li>
 
 <?php
 

@@ -19,6 +19,7 @@ if (!defined('IN_SCRIPT'))
 		<input name="email-confirm" type="text" placeholder="confirm email..." />
 		<input name="password" type="password" placeholder="password... (8 characters minimum)" />
 		<input name="password-confirm" type="password" placeholder="confirm password... (8 characters minimum)" />
+		<?php input_csrf(); ?>
 		<input name="submit" type="submit" value="Register" />
 	</form>
 

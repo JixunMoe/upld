@@ -17,6 +17,7 @@ if (!defined('IN_SCRIPT'))
 	<form name="login" method="POST" action="login.php">
 		<input name="email" type="text" placeholder="email..." />
 		<input name="password" type="password" placeholder="password..." />
+		<?php input_csrf(); ?>
 		<input name="submit" type="submit" value="Log in" />
 	</form>
 
