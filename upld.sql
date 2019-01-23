@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `user` smallint(5) unsigned DEFAULT NULL,
   `ip` varchar(39) NOT NULL,
   `removed` enum('0','1') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ip` varchar(39) NOT NULL,
   `actioned` enum('1','0') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `ip` varchar(39) NOT NULL,
   `admin` enum('0','1') NOT NULL DEFAULT '0',
   `banned` enum('0','1') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci;
 
 --
 -- Indexes for dumped tables
