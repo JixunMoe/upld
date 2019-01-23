@@ -27,14 +27,14 @@ $size = round($allowed_size, 1) . $units[$i];
 
 	<ul id="faq">
 
-		<li>Is <?php echo SITE_NAME; ?> really free?</li>
+		<li>Is <?= SITE_NAME ?> really free?</li>
 		<li>Yes! It is 100% free to use</li>
 
 		<li>Which types of image can I upload?</li>
 		<li>You can upload images with the following extensions: <span class="black">PNG, JPG, GIF</span></li>
 
 		<li>Can I upload big images?</li>
-		<li>Yes! You can upload any image up to <span class="black"><?php echo $size; ?>B</span> in size</li>
+		<li>Yes! You can upload any image up to <span class="black"><?= $size ?>B</span> in size</li>
 
 		<li>Will you delete my image after X days?</li>
 		<li>Nope. We will only delete your image if it is against our terms &amp; conditions</li>

@@ -12,6 +12,6 @@ if (!defined('IN_SCRIPT'))
 
 	<p class="title">Message</p>
 
-	<p><?php echo $message; ?></p>
+	<p><?= $message ?></p>
 
 </div>

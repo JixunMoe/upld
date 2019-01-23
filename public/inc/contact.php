@@ -12,6 +12,6 @@ if (!defined('IN_SCRIPT'))
 
 	<p class="title">Contact</p>
 
-	<p>If you would like to contact us, please email <?php echo CONTACT_EMAIL; ?></p>
+	<p>If you would like to contact us, please email <?= CONTACT_EMAIL ?></p>
 
 </div>

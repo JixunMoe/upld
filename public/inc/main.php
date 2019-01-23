@@ -23,10 +23,10 @@ $size = round($allowed_size, 1) . $units[$i];
 
 		<div class="box">
 
-			<p class="title">Welcome to <?php echo SITE_NAME; ?></p>
+			<p class="title">Welcome to <?= SITE_NAME ?></p>
 
 			<ul>
-				<li><span class="black"><?php echo SITE_NAME; ?></span> is a free, online image host. Simply click the button below to start uploading!</li>
+				<li><span class="black"><?= SITE_NAME ?></span> is a free, online image host. Simply click the button below to start uploading!</li>
 				<li>Before uploading, you can register an account (or log in if you already have one) and manager your uploads later</li>
 			</ul>
 
@@ -34,7 +34,7 @@ $size = round($allowed_size, 1) . $units[$i];
 
 		<div class="box">
 
-			<p class="title">Why use <?php echo SITE_NAME; ?>?</p>
+			<p class="title">Why use <?= SITE_NAME ?>?</p>
 
 			<ul>
 				<li>It's completely <span class="black">free</span>!</li>
@@ -55,7 +55,7 @@ if (ALLOW_REMOTE === true)
 ?>
 
 				<li>The following image types are allowed: <span class="black">PNG, JPG, GIF</span></li>
-				<li>The files may be up to <span class="black"><?php echo $size ?>B</span> in size</li>
+				<li>The files may be up to <span class="black"><?= $size ?>B</span> in size</li>
 <?php
 
 if (FRIENDLY_URLS === true)
@@ -87,7 +87,7 @@ if ((ANON_UPLOADS === true) || ((ANON_UPLOADS === false) && (isset($_SESSION['us
 		</div>
 
 		<form id="upload-form" class="hidden" name="upload" method="POST" action="upload.php" enctype="multipart/form-data">
-			<input id="image-input" name="image" type="file" />
+			<input id="image-input" name="image[]" multiple type="file" />
 			<?php input_csrf(); ?>
 		</form>
 

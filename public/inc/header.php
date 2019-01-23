@@ -11,7 +11,7 @@ if (!defined('IN_SCRIPT'))
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo SITE_NAME; ?></title>
+	<title><?= SITE_NAME ?></title>
 	<link href="css/upload.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -23,9 +23,7 @@ if (!defined('IN_SCRIPT'))
 
 			<!-- need to use a dirty hack here to avoid whitespace in between navbar buttons  -->
 
-			<li><a href="index.php">upload</a></li><!--
-
-<?php
+			<li><a href="index.php">upload</a></li><?php
 
 if (isset($_SESSION['user']))
 {
@@ -38,11 +36,7 @@ if (isset($_SESSION['user']))
 else
 {
 
-?>
-
-			--><li><a href="login.php">login</a></li><li><a href="register.php">register</a></li>
-
-<?php
+?><li><a href="login.php">login</a></li><li><a href="register.php">register</a></li><?php
 
 }
 
@@ -50,9 +44,8 @@ else
 
 		</ul>
 
-		<div id="logo"><?php echo SITE_NAME; ?></div>
+		<div id="logo"><?= SITE_NAME ?></div>
 
 	</div>
 
 	<div id="main">
-
