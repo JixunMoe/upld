@@ -31,6 +31,10 @@ function exit_message($message)
 	exit;
 }
 
+function is_admin() {
+	return isset($_SESSION['admin']) && $_SESSION['admin'];
+}
+
 function get_csrf() {
 	return $_SESSION['csrf'];
 }

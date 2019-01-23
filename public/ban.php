@@ -6,7 +6,7 @@ require('common.php');
 validate_csrf();
 
 // make sure user is logged in (for non-admins, we will verify their ID later)
-if (!isset($_SESSION['admin']))
+if (!is_admin())
 {
 	exit_message('You are not authorised to perform this action. Please log in.');
 }

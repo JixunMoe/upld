@@ -38,7 +38,7 @@ mysqli_stmt_bind_result($exists, $ext, $user);
 mysqli_stmt_fetch($exists);
 mysqli_stmt_close($exists);
 
-if (!isset($_SESSION['admin']) && ($_SESSION['user'] !== $user))
+if (!is_admin() && ($_SESSION['user'] !== $user))
 {
 	exit('You are not authorised to perform this action.');
 }
