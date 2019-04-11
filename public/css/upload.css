@@ -1,4 +1,4 @@
-@import url('//fonts.googleapis.com/css?family=Open Sans:400,600');
+@import url('https://fonts.googleapis.com/css?family=Open Sans:400,600');
 
 * {
     margin: 0;
@@ -304,4 +304,52 @@ form[name='login'] input[type='submit'], form[name='register'] input[type='submi
 #footer a {
     margin: 0 10px;
     color: #999;
+}
+
+body.js .no-script-only {
+	display: none;
+}
+
+body.no-js .script-required {
+	display: none;
+}
+
+progress {
+	width: 100%;
+}
+
+#files {
+	display: flex;
+	padding: .5rem;
+	flex-wrap: wrap;
+}
+
+.upload-part {
+    flex: 0 1 auto;
+	margin: .5rem;
+	
+	box-shadow: 3px 3px 5px #ccc;
+    border: 1px solid #eee;
+}
+
+.upload-part .name {
+	padding-left: 0.5em;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 120px;
+    display: inline-block;
+	white-space: nowrap;
+}
+
+.upload-error {
+	color: red;
+}
+
+.actions {
+	text-align: right;
+    padding-right: 0.5em;
+}
+
+.delete-btn {
+	color: red;
 }
