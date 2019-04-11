@@ -277,7 +277,7 @@ if ($size > 0) {
 		$id = process_upload($i, null);
 		// echo 'upload: ' . $id . '<br>';
 		$results[] = array(
-			'thumbnailUrl' => "thumbs/${id}.jpg",
+			'thumbnailUrl' => CACHE_URL . "/${id}.jpg",
 			'name' => "${id}.${ext}",
 			'url' => IMAGE_URL . "/${id}.${ext}",
 			'deleteType' => "DELETE",

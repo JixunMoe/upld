@@ -19,7 +19,7 @@ if (!defined('IN_SCRIPT'))
 while (mysqli_stmt_fetch($images)) {
 
 ?><div class="user-image-box">
-			<a href="<?= VIEW_PATH . $id ?>"><img class="user-image" src="thumbs/<?= $id . '.jpg' ?>" alt="<?= $id ?>" /></a>
+			<a href="<?= VIEW_PATH . $id ?>"><img class="user-image" src="<?= CACHE_URL ?>/<?= $id . '.jpg' ?>" alt="<?= $id ?>" /></a>
 			<ul class="image-actions">
 				<li>uploaded <?= $time ?></li>
 				<li><a class="delete" href="delete.php?id=<?= $id ?>&csrf=<?= get_csrf() ?>">DELETE image</a></li>
