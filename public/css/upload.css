@@ -219,8 +219,6 @@ form[name='login'] input[type='submit'], form[name='register'] input[type='submi
 }
 
 #download-url {
-    width: 250px;
-    float: right;
     padding: 0;
 }
 
@@ -237,13 +235,17 @@ form[name='login'] input[type='submit'], form[name='register'] input[type='submi
 }
 
 #select-url {
-    margin-right: 250px;
-    padding: 0;
+    padding: .5rem;
     cursor: text;
 }
 
 #select-url-input {
-    padding: 15px 10px;
+    width: 100%;
+    box-sizing: border-box;
+
+    height: 4rem;
+    border-radius: 3px;
+    padding: .25rem;
 }
 
 #allowed-ext {

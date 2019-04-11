@@ -120,15 +120,19 @@ if ((ANON_UPLOADS === true) || ((ANON_UPLOADS === false) && (isset($_SESSION['us
 
 ?>
 
-		<form id="url-form" name="remote-url" method="POST" action="upload.php">
+		<form id="url-form" name="remote-url" method="POST" action="./upload.php">
 
 			<?php input_csrf(); ?>
-			<div id="download-url" class="box">
-				<input id="image-url-submit" type="submit" value="download remote image" />
-			</div>
 
 			<div id="select-url" class="box">
-				<input id="select-url-input" name="url" type="text" placeholder="Want to download your image remotely? Paste the link here (http://)" />
+				<textarea id="select-url-input"
+				          name="url" type="text"
+				          placeholder="Want to download your image remotely? Paste links here (one per line)"
+				></textarea>
+
+				<div id="download-url">
+					<input id="image-url-submit" type="submit" value="download remote image" />
+				</div>
 			</div>
 		</form>
 

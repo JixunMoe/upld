@@ -70,7 +70,7 @@ function process_upload($index, $url) {
 		if (!filter_var($url, FILTER_VALIDATE_URL) || (!in_array(parse_url($url, PHP_URL_SCHEME), $allowed_schemes)))
 		{
 			// not a valid URL
-			exit_message('Sorry, this URL is invalid');
+			exit_message('Sorry, this URL ' . $url . ' is invalid');
 		}
 
 		// if whitelisting is enabled, make sure it's an allowed domain
@@ -81,7 +81,8 @@ function process_upload($index, $url) {
 
 		// looks good so far, download the image and make sure it's valid
 		$size = get_headers($url, 1)['Content-Length'];
-		$ext = end(explode('.',$url));
+		$arr = explode('.',$url);
+		$ext = end($arr);
 	}
 
 	// OK, everything checks out so far
@@ -106,7 +107,7 @@ function process_upload($index, $url) {
 		$image = $_FILES['image']['tmp_name'][$index];
 		if (!$image) {
 			// image too large.
-			return '';
+			return array(null, null);
 		}
 
 		if (!getimagesize($image))
@@ -262,7 +263,7 @@ function process_upload($index, $url) {
 	++$db_queries;
 	mysqli_stmt_close($query);
 
-	return $id;
+	return array($id, $ext);
 }
 
 $size = empty($_FILES['image']['name'][0]) ? 0 : count($_FILES['image']['name']);
@@ -270,25 +271,35 @@ $multiple = $size > 0;
 
 $results = array();
 
+function do_upload($index, $url) {
+	global $results;
+
+	list($id, $ext) = process_upload($index, $url);
+	$results[] = array(
+		'thumbnailUrl' => CACHE_URL . "/${id}.jpg",
+		'name' => "${id}.${ext}",
+		'url' => IMAGE_URL . "/${id}.${ext}",
+		'deleteType' => "DELETE",
+		'type' => "image/jpeg",
+		'deleteUrl' => SITE_URL . '/delete.php?id=' . $id . '&csrf=' . get_csrf(),
+		'size' => 1,
+	);
+	
+	return $id;
+}
+
 if ($size > 0) {
 	// File upload
 	for($i = 0; $i < $size; $i++) {
-		$ext = substr($_FILES['image']['name'][0], -3);
-		$id = process_upload($i, null);
-		// echo 'upload: ' . $id . '<br>';
-		$results[] = array(
-			'thumbnailUrl' => CACHE_URL . "/${id}.jpg",
-			'name' => "${id}.${ext}",
-			'url' => IMAGE_URL . "/${id}.${ext}",
-			'deleteType' => "DELETE",
-			'type' => "image/jpeg",
-			'deleteUrl' => SITE_URL . '/delete.php?id=' . $id . '&csrf=' . get_csrf(),
-			'size' => 1,
-		);
+		$id = do_upload($i, null);
 	}
 } else {
 	// remote upload
-	process_upload(null, $url);
+	$urls = explode("\n", $url);
+	
+	foreach ($urls as $u) {
+		$id = do_upload(null, trim($u));
+	}
 }
 
 // close connection
