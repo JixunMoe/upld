@@ -80,8 +80,9 @@ if (FRIENDLY_URLS === true)
 if ((ANON_UPLOADS === true) || ((ANON_UPLOADS === false) && (isset($_SESSION['user']))))
 {
 
+	define('INC_UPLOAD_SCRIPT', 1);
 ?>
-
+	<section id="upload-fallback" class="no-script-only">
 		<div id="select-image" class="box">
 			click here to select an image
 		</div>
@@ -94,6 +95,23 @@ if ((ANON_UPLOADS === true) || ((ANON_UPLOADS === false) && (isset($_SESSION['us
 		<div id="cancel-image" class="hidden">
 			<span>wait, I want to upload something else!</span>
 		</div>
+	</section>
+
+    <!-- Script enabled, use this -->
+    <form id="fileupload" class="box script-required" action="./upload.php" method="POST" enctype="multipart/form-data">
+		Click <label for="i"><a style="cursor:pointer">here</a></label>, or drag files over here to upload.
+		<div style="display:none">
+			<input id="i" type="file" name="image[]" multiple>
+			<input type="hidden" name="ajax" value="1">
+			<?php input_csrf(); ?>
+		</div>
+		
+		<div id="progress">
+			<progress value=0 max="100"></progress>
+		</div>
+
+        <div role="presentation" id="files"></div>
+    </form>
 
 <?php
 

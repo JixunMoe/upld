@@ -104,7 +104,7 @@ function process_upload($index, $url) {
 	if (!is_null($index))
 	{
 		$image = $_FILES['image']['tmp_name'][$index];
-		if (!image) {
+		if (!$image) {
 			// image too large.
 			return '';
 		}
@@ -138,7 +138,7 @@ function process_upload($index, $url) {
 		// create ID
 		$id = '';
 		$chars = 'ACDEFHJKLMNPQRTUVWXYZabcdefghijkmnopqrstuvwxyz23479';
-		for ($i = 0; $i < 5; ++$i)
+		for ($i = 0; $i < IMAGE_ID_LEN; ++$i)
 		{
 			$id .= $chars[mt_rand(0, 50)];
 		}
@@ -268,20 +268,43 @@ function process_upload($index, $url) {
 $size = empty($_FILES['image']['name'][0]) ? 0 : count($_FILES['image']['name']);
 $multiple = $size > 0;
 
+$results = array();
+
 if ($size > 0) {
+	// File upload
 	for($i = 0; $i < $size; $i++) {
+		$ext = substr($_FILES['image']['name'][0], -3);
 		$id = process_upload($i, null);
 		// echo 'upload: ' . $id . '<br>';
+		$results[] = array(
+			'thumbnailUrl' => "thumbs/${id}.jpg",
+			'name' => "${id}.${ext}",
+			'url' => IMAGE_URL . "/${id}.${ext}",
+			'deleteType' => "DELETE",
+			'type' => "image/jpeg",
+			'deleteUrl' => SITE_URL . '/delete.php?id=' . $id . '&csrf=' . get_csrf(),
+			'size' => 1,
+		);
 	}
 } else {
+	// remote upload
 	process_upload(null, $url);
 }
 
 // close connection
 mysqli_close($db);
 
-if ($multiple) {
+if (!empty($_POST['ajax']))
+{
+	header('Content-Type: application/json');
+	echo json_encode(array('files' => $results));
+}
+else if ($multiple)
+{
+	// TODO: Print $results data.
 	header('location: ' . SITE_URL . '/account.php');
-} else {
+}
+else
+{
 	header('location: ' . VIEW_URL . $id);
 }

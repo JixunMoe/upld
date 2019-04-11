@@ -2,8 +2,10 @@
 
 define('SITE_NAME', 'yoursite.com'); // site name displayed in the header and FAQ/ToS
 
-define('SITE_URL', 'admin@email.com'); // the domain ONLY for your site (i.e. without the "upld" folder)
+define('SITE_URL', 'http://localhost/public/'); // the domain ONLY for your site (i.e. without the "upld" folder)
+define('IMAGE_URL', 'http://localhost/public/images'); // the domain ONLY for your site (i.e. without the "upld" folder)
 define('SCRIPT_PATH', ''); // folder where the script is located (leave blank if it's in the root directory)
+define('IMAGE_ID_LEN', 16);
 
 // email for contact page
 define('CONTACT_EMAIL', 'contact@yoursite.com'); // the email on the contact page
@@ -21,7 +23,10 @@ define('DB_NAME', 'upld');
 define('DB_PORT', 3306); // usually 3306 by default. If you don't know what this is, leave it alone and ask your hosting company if it doesn't work
 
 // allow remote downloads? GD (php5-gd) MUST be enabled for this to work
-define('ALLOW_REMOTE', true);
+define('ALLOW_REMOTE', false);
+
+// allow user to register?
+define('ALLOW_REGISTER', false);
 
 // max size in bytes - remember that you might need to change this in your PHP config file too
 define('ALLOWED_SIZE', 2000000); // 1000 = 1 kilobyte, 1000000 = 1 megabyte
@@ -31,6 +36,9 @@ define('ANON_UPLOADS', true);
 
 // set to true to only allow image downloads from whitelisted URLs (below)
 define('URL_WHITELIST', false);
+
+// Should a report email be sent when someone clicks report?
+define('SEND_REPORT_EMAIL', false);
 
 $allowed_urls = [
 	'i.imgur.com',
