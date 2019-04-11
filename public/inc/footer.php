@@ -15,8 +15,8 @@ if (!defined('IN_SCRIPT'))
 		<!-- page generated in <?= round((microtime(true) - $start), 5) ?> seconds with <?= $db_queries ?> DB quer<?= ($db_queries === 1 ? 'y' : 'ies') ?> -->
 	</div>
 
-<?php if (defined('INC_UPLOAD_SCRIPT')) { ?>
 	<script src="js/jquery.min.js"></script>
+<?php if (defined('INC_UPLOAD_SCRIPT')) { ?>
 	<script src="js/jquery.ui.widget.js"></script>
 	<script src="js/load-image.all.min.js"></script>
 	<script src="js/jquery.fileupload.js"></script>
@@ -28,12 +28,7 @@ if (!defined('IN_SCRIPT'))
 	</script>
 	<script src="js/upload.js"></script>
 <?php } ?>
-
-<script>
-$(function () {
-	$('body').toggleClass('no-js js');
-});
-</script>
+	<script src="js/app.js"></script>
 
 </body>
 </html>
