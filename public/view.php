@@ -3,7 +3,7 @@
 require('config.php');
 require('common.php');
 
-if (!ctype_alnum($_GET['id']) || (strlen($_GET['id']) !== 5))
+if (!ctype_alnum($_GET['id']))
 {
 	exit_message('Oops, that ID appears to be invalid. IDs should have 5 characters and contain letters and numbers only.');
 }
