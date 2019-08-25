@@ -233,9 +233,9 @@ function process_upload($index, $url) {
 				imagecolortransparent($thumb, $new_thumb);
 			break;
 		}
-		
+
 		imagecopyresized($new_thumb, $thumb, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-		imagedestroy($thumb);	
+		imagedestroy($thumb);
 
 		imagejpeg($new_thumb, 'thumbs/' . $id . '.jpg', 30);
 		imagedestroy($new_thumb);
@@ -255,7 +255,7 @@ function process_upload($index, $url) {
 
 	// set data for query
 	$user = $_SESSION['user'];
-	$ip = $_SERVER['REMOTE_ADDR'];
+	$ip = BEHIND_CF ? $_SERVER['HTTP_CF_CONNECTING_IP'] : $_SERVER['REMOTE_ADDR'];
 
 	// insert data
 	mysqli_stmt_execute($query);

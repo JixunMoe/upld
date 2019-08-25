@@ -1,5 +1,8 @@
 <?php
 
+// Is the site behind CloudFlare?
+define('BEHIND_CF', false);
+
 define('SITE_NAME', 'yoursite.com'); // site name displayed in the header and FAQ/ToS
 
 define('SITE_URL', 'admin@email.com'); // the domain ONLY for your site (i.e. without the "upld" folder)
