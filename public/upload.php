@@ -70,7 +70,7 @@ function process_upload($index, $url) {
 		if (!filter_var($url, FILTER_VALIDATE_URL) || (!in_array(parse_url($url, PHP_URL_SCHEME), $allowed_schemes)))
 		{
 			// not a valid URL
-			exit_message('Sorry, this URL is invalid');
+			exit_message('Sorry, this URL ' . $url . ' is invalid');
 		}
 
 		// if whitelisting is enabled, make sure it's an allowed domain
@@ -81,7 +81,8 @@ function process_upload($index, $url) {
 
 		// looks good so far, download the image and make sure it's valid
 		$size = get_headers($url, 1)['Content-Length'];
-		$ext = end(explode('.',$url));
+		$arr = explode('.',$url);
+		$ext = end($arr);
 	}
 
 	// OK, everything checks out so far
@@ -104,9 +105,9 @@ function process_upload($index, $url) {
 	if (!is_null($index))
 	{
 		$image = $_FILES['image']['tmp_name'][$index];
-		if (!image) {
+		if (!$image) {
 			// image too large.
-			return '';
+			return array(null, null);
 		}
 
 		if (!getimagesize($image))
@@ -138,7 +139,7 @@ function process_upload($index, $url) {
 		// create ID
 		$id = '';
 		$chars = 'ACDEFHJKLMNPQRTUVWXYZabcdefghijkmnopqrstuvwxyz23479';
-		for ($i = 0; $i < 5; ++$i)
+		for ($i = 0; $i < IMAGE_ID_LEN; ++$i)
 		{
 			$id .= $chars[mt_rand(0, 50)];
 		}
@@ -262,26 +263,59 @@ function process_upload($index, $url) {
 	++$db_queries;
 	mysqli_stmt_close($query);
 
-	return $id;
+	return array($id, $ext);
 }
 
 $size = empty($_FILES['image']['name'][0]) ? 0 : count($_FILES['image']['name']);
 $multiple = $size > 0;
 
+$results = array();
+
+function do_upload($index, $url) {
+	global $results;
+
+	list($id, $ext) = process_upload($index, $url);
+	$results[] = array(
+		'thumbnailUrl' => CACHE_URL . "/${id}.jpg",
+		'name' => "${id}.${ext}",
+		'url' => IMAGE_URL . "/${id}.${ext}",
+		'deleteType' => "DELETE",
+		'type' => "image/jpeg",
+		'deleteUrl' => SITE_URL . '/delete.php?id=' . $id . '&csrf=' . get_csrf(),
+		'size' => 1,
+	);
+	
+	return $id;
+}
+
 if ($size > 0) {
+	// File upload
 	for($i = 0; $i < $size; $i++) {
-		$id = process_upload($i, null);
-		// echo 'upload: ' . $id . '<br>';
+		$id = do_upload($i, null);
 	}
 } else {
-	process_upload(null, $url);
+	// remote upload
+	$urls = explode("\n", $url);
+	
+	foreach ($urls as $u) {
+		$id = do_upload(null, trim($u));
+	}
 }
 
 // close connection
 mysqli_close($db);
 
-if ($multiple) {
+if (!empty($_POST['ajax']))
+{
+	header('Content-Type: application/json');
+	echo json_encode(array('files' => $results));
+}
+else if ($multiple)
+{
+	// TODO: Print $results data.
 	header('location: ' . SITE_URL . '/account.php');
-} else {
+}
+else
+{
 	header('location: ' . VIEW_URL . $id);
 }

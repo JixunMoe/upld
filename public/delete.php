@@ -12,7 +12,7 @@ if (!isset($_SESSION['user']))
 }
 
 // make sure ID is valid
-if (!ctype_alnum($_GET['id']) || (strlen($_GET['id']) !== 5))
+if (!ctype_alnum($_GET['id']))
 {
 	exit_message('Oops, that ID appears to be invalid. IDs should have 5 characters and contain letters and numbers only.');
 }
@@ -81,5 +81,14 @@ if ($result === 1)
 
 mysqli_close($db);
 
-header('location: ' . SITE_URL . '/account.php');
+if (!empty($_GET['ajax']))
+{
+	header('Content-Type: application/json');
+	echo '{"success":true}';
+}
+else
+{
+	header('location: ' . SITE_URL . '/account.php');
+}
+
 

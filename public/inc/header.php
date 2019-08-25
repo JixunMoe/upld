@@ -15,7 +15,7 @@ if (!defined('IN_SCRIPT'))
 	<link href="css/upload.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body class="no-js">
 
 	<div id="header">
 
